@@ -17,18 +17,18 @@ public class hangMan{
 			
 			//create charArray to hold String value from sArray at specified index			
 			char[] cA = fileMod.arrayToChar(sArray[5]);
-			
-			//print first char of sArray's String value at the selected index above
-			System.out.println(cA.length);
-			int correct = 0;
-			
-			
 				
 				System.out.print("Enter a character guess: ");
 				// scanner object "in" takes user guess as type char and puts it into "charEnt" var.
 				Scanner in = new Scanner(System.in);
 				char charEnt = in.next().charAt(0);		
-		
+			// create charArray full of *'s the length of the present guess word	
+			char[] cA2 = fileMod.starArray(fileMod.numOfChar(sArray[5]));
+			// print contents of cA2 as test
+			for(int w =0; w < cA2.length; w++){
+				System.out.print(cA2[w] + " " );
+			}
+			
 	}
 }
 
@@ -69,5 +69,13 @@ class fileMod{
 			return arr;
 		}
 			
-	
+	// method that creates a charArray full of "*" the length of the int value passed in as a parameter
+	static char[] starArray(int len) {
+		
+		char[] starCArray = new char[len];
+		for(int n =0; n < starCArray.length; n++){
+			starCArray[n] = '*';	
+		}
+		return starCArray;
+	}
 }

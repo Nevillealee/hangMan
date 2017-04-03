@@ -23,16 +23,18 @@ public class hangMan{
 			// print contents of cA2 as test
 				
 			int misses = 0;	
+			// int var declarations for iterating through arrays with for loops inside the while loop below
 			int w = 0;
 			int t = 0;
-			
-			//loop prompts user for guesses until they miss 9 times or get answer right
-		while( misses < 10){
-				System.out.print("\n Enter a character guess: ");
+			char choice = 'y';
+		while(choice == 'y'){
+			//loop prompts user for guesses until they miss 9 times or get answer right and array cA & cA2 match
+		while( misses < 10 && (java.util.Arrays.equals(cA2,cA)) == false){
+				System.out.print("\nEnter a character guess: ");
 				// scanner object "in" takes user guess as type char and puts it into "charEnt" var.
 				Scanner in = new Scanner(System.in);
 				char charEnt = in.next().charAt(0);
-				
+				System.out.print("\n");
 				//compares users input to every letter in guess word. if letter not in word prints * array without update
 				if(sArray[5].indexOf(charEnt) == -1){
 					//loop to print * array contents
@@ -42,28 +44,45 @@ public class hangMan{
 					// print message showing incorrectly guessed word 
 					System.out.print(" " + "("+ charEnt +")" + "  is not in the word :( ");
 					misses++; // increments user misses 
+					System.out.print("\n");
 					}
 				else{ 
-					//loop continues to replace all dupilcates of correctly guess letters in * array until their are no more
-					if (sArray[5].indexOf(charEnt) != -1){
-					// if user guesses correct letter, charArray containing guess word swaps letter with * array index 
+					// if user guesses correct letter, charArray containing guess word swaps letter with * array index cA2
 					cA2[sArray[5].indexOf(charEnt)] = cA[sArray[5].indexOf(charEnt)];
-					}
-					//prints updated array with guessed letters revealed insteal of hidden as a *
+					cA2[sArray[5].lastIndexOf(charEnt)] = cA[sArray[5].lastIndexOf(charEnt)];
+					System.out.print("\n");
+					//prints updated array with guessed letters revealed instead of hidden as a *
 					for(t =0; t < cA2.length; t++){
 					System.out.print(cA2[t]);
+						}
+					System.out.print("\n");
 					}
-					
+		
 				}
+			// prints "Game over" if user guesses wrong 9 times	
+			if(misses == 10){
+				System.out.println("\n Game over");
+				System.out.print("Continue? \n Enter y or n");
+				Scanner in2 = new Scanner(System.in);
+				choice = in2.next().charAt(0);
 			}
+			// prints "You guessed it" if user guess' word with in 9 trys and both the * array "cA2" and the guess word charArray "cA" match
+			else{
+				System.out.println("\nYou guessed it!!!");
+				System.out.print("Continue? \nEnter y or n");
+				Scanner in3 = new Scanner(System.in);
+				choice = in3.next().charAt(0);
+				}
+			 
+			}
+		
 	
 	}				
 	
 }
 
 class fileMod{
-	// DATA FIELDS
-	
+
 	//method that converts file object into array of file contents
 	static String[] fileToArray(File f) throws FileNotFoundException {
 		try {

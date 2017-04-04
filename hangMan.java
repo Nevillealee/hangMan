@@ -26,15 +26,15 @@ public class hangMan{
 			//create array to store tokens from file 
 			String[] sArray = fileMod.fileToArray(hangmanF);
 			Random ran = new Random();
-				int z = ran.nextInt(sArray.length -1);
+				int z = ran.nextInt(sArray.length - 1);
 			
 			//create charArray to hold String value from sArray at specified index			
-			char[] cA = fileMod.arrayToChar(sArray[z]);
+			char[] cA = fileMod.arrayToChar(sArray[z]);                                 //null pointer exception bug 4/3/17
 						
 			// create charArray full of *'s the length of the present guess word	
 			char[] cA2 = fileMod.starArray(fileMod.numOfChar(sArray[z]));
 			
-				
+			
 				
 			
 				
@@ -110,7 +110,7 @@ class fileMod{
 	static String[] fileToArray(File f) throws FileNotFoundException {
 		try {
 		Scanner content = new Scanner(f);
-		String[] arr = new String[20];
+		String[] arr = new String[14];
 		for(int i=0; content.hasNext(); i++){
 			String text = content.next();	
 			arr[i] = text; 
